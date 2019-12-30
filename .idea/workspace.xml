@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d35d1fa3-d7a3-4cf7-93f3-6f91b4d6fbad" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/news-init.js" afterPath="$PROJECT_DIR$/web/js/news-init.js" />
     </list>
     <ignored path="mingdaofun.iws" />
@@ -49,21 +48,20 @@
       <file leaf-file-name="news-init.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/js/news-init.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8396226">
-              <caret line="399" column="1090" selection-start-line="399" selection-start-column="1090" selection-end-line="399" selection-end-column="1090" />
+            <state vertical-scroll-proportion="0.5566038">
+              <caret line="448" column="21" selection-start-line="448" selection-start-column="21" selection-end-line="448" selection-end-column="21" />
               <folding>
-                <marker date="1577709489121" expanded="true" signature="31361:31373" placeholder="..." />
-                <marker date="1577709489121" expanded="true" signature="36232:36248" placeholder="..." />
-                <marker date="1577709489121" expanded="true" signature="36570:36588" placeholder="..." />
-                <marker date="1577709489121" expanded="true" signature="37824:37849" placeholder="..." />
-                <marker date="1577709489121" expanded="true" signature="37887:37906" placeholder="..." />
-                <marker date="1577709489121" expanded="true" signature="38201:38219" placeholder="..." />
-                <marker date="1577709489121" expanded="true" signature="39017:39033" placeholder="..." />
-                <marker date="1577709489121" expanded="true" signature="39356:39374" placeholder="..." />
-                <marker date="1577709489121" expanded="true" signature="43485:43501" placeholder="..." />
-                <marker date="1577709489121" expanded="true" signature="43803:43821" placeholder="..." />
-                <marker date="1577709489121" expanded="true" signature="45687:45712" placeholder="..." />
-                <marker date="1577709489121" expanded="true" signature="45975:45993" placeholder="..." />
+                <marker date="1577710465863" expanded="true" signature="35074:35090" placeholder="..." />
+                <marker date="1577710465863" expanded="true" signature="35412:35430" placeholder="..." />
+                <marker date="1577710465863" expanded="true" signature="36666:36691" placeholder="..." />
+                <marker date="1577710465863" expanded="true" signature="36729:36748" placeholder="..." />
+                <marker date="1577710465863" expanded="true" signature="37043:37061" placeholder="..." />
+                <marker date="1577710465863" expanded="true" signature="37859:37875" placeholder="..." />
+                <marker date="1577710465863" expanded="true" signature="38198:38216" placeholder="..." />
+                <marker date="1577710465863" expanded="true" signature="42327:42343" placeholder="..." />
+                <marker date="1577710465863" expanded="true" signature="42645:42663" placeholder="..." />
+                <marker date="1577710465863" expanded="true" signature="44529:44554" placeholder="..." />
+                <marker date="1577710465863" expanded="true" signature="44817:44835" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -582,12 +580,12 @@
       <option name="number" value="Default" />
       <updated>1577669882586</updated>
       <workItem from="1577669883879" duration="1720000" />
-      <workItem from="1577708806516" duration="535000" />
+      <workItem from="1577708806516" duration="1009000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2255000" />
+    <option name="totallyTimeSpent" value="2729000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -675,21 +673,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/js/news-init.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8396226">
-          <caret line="399" column="1090" selection-start-line="399" selection-start-column="1090" selection-end-line="399" selection-end-column="1090" />
+        <state vertical-scroll-proportion="0.5566038">
+          <caret line="448" column="21" selection-start-line="448" selection-start-column="21" selection-end-line="448" selection-end-column="21" />
           <folding>
-            <marker date="1577709489121" expanded="true" signature="31361:31373" placeholder="..." />
-            <marker date="1577709489121" expanded="true" signature="36232:36248" placeholder="..." />
-            <marker date="1577709489121" expanded="true" signature="36570:36588" placeholder="..." />
-            <marker date="1577709489121" expanded="true" signature="37824:37849" placeholder="..." />
-            <marker date="1577709489121" expanded="true" signature="37887:37906" placeholder="..." />
-            <marker date="1577709489121" expanded="true" signature="38201:38219" placeholder="..." />
-            <marker date="1577709489121" expanded="true" signature="39017:39033" placeholder="..." />
-            <marker date="1577709489121" expanded="true" signature="39356:39374" placeholder="..." />
-            <marker date="1577709489121" expanded="true" signature="43485:43501" placeholder="..." />
-            <marker date="1577709489121" expanded="true" signature="43803:43821" placeholder="..." />
-            <marker date="1577709489121" expanded="true" signature="45687:45712" placeholder="..." />
-            <marker date="1577709489121" expanded="true" signature="45975:45993" placeholder="..." />
+            <marker date="1577710465863" expanded="true" signature="35074:35090" placeholder="..." />
+            <marker date="1577710465863" expanded="true" signature="35412:35430" placeholder="..." />
+            <marker date="1577710465863" expanded="true" signature="36666:36691" placeholder="..." />
+            <marker date="1577710465863" expanded="true" signature="36729:36748" placeholder="..." />
+            <marker date="1577710465863" expanded="true" signature="37043:37061" placeholder="..." />
+            <marker date="1577710465863" expanded="true" signature="37859:37875" placeholder="..." />
+            <marker date="1577710465863" expanded="true" signature="38198:38216" placeholder="..." />
+            <marker date="1577710465863" expanded="true" signature="42327:42343" placeholder="..." />
+            <marker date="1577710465863" expanded="true" signature="42645:42663" placeholder="..." />
+            <marker date="1577710465863" expanded="true" signature="44529:44554" placeholder="..." />
+            <marker date="1577710465863" expanded="true" signature="44817:44835" placeholder="..." />
           </folding>
         </state>
       </provider>
