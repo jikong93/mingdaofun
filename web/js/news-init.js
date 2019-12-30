@@ -397,6 +397,7 @@ $("#cmn-toggle-pinyinOp").click(function () {showOrHide(this,"pinyinText","p");}
 $("#cmn-toggle-redioOp").click(function () {showOrHide(this,"textRedio","div");downVoice(this);});
 $(function(){
   onInit();
+    $("#replyModal").append(`<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="cancelRevert()">&times;</button><h4 class="modal-title" >Reply <span id="modal-toUser"></span></h4><input type="hidden" id="replyId" name="replyId"></div><div class="modal-body"><div class="contact-box text-center"><div class="form-group row"><div class="col-lg-6"><input type="text" class="form-control" id="modal-name" name="name" placeholder="Name*" required=""></div><div class="col-lg-6"><input type="email" class="form-control" id="modal-email" name="email" placeholder="Email" required=""></div></div><div class="form-group"><textarea class="form-control" id="modal-message" name="message" rows="10" style="float: left;"><font color="red"><span id="replyRlt"></span></font></label><button type="button" class="btn btn-default" data-dismiss="modal" onclick="cancelRevert()">cancel </button><button type="button" class="btn btn-primary" onclick="submitRevert()"> Submit  </button></div></div></div>`);
 });
 
 
