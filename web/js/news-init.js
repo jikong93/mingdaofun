@@ -330,113 +330,122 @@ jQuery(document).ready(function($){
   });
 });
 
-/* my  */
-function itemShowOrHide(i,n,hs){ 
-        $("" + i + "[name='"+ n +"']").each(function() {
-            if(hs == "show"){
-                $(this).show();
-            }else{
-                $(this).hide();
-            }
-        }); 
+/*-----------------------------------------------------------------------------------*/
+/*  my js
+ /*-----------------------------------------------------------------------------------*/
+var apiHost = "http://mingdao.fun"
+function itemShowOrHide(i,n,hs){
+    $("" + i + "[name='"+ n +"']").each(function() {
+        if(hs == "show"){
+            $(this).show();
+        }else{
+            $(this).hide();
+        }
+    });
 }
 function onInit(){
-  if(chk_userlanguage() == 'zh'){
-    itemShowOrHide("li","enLabel","hide");
-            itemShowOrHide("li","zhLabel","show");
-  }else{
-            itemShowOrHide("li","enLabel","show");
-            itemShowOrHide("li","zhLabel","hide");
-  } 
-   
-  if(!$("#cmn-toggle-chineseOp").is(':checked') && $("#cmn-toggle-englishOp").is(':checked')){
-msgDiv();
-  }else if($("#cmn-toggle-chineseOp").is(':checked') && !$("#cmn-toggle-englishOp").is(':checked')){
-    itemShowOrHide("p","chineseText","show");
-            itemShowOrHide("p","englishText","hide");
-   }
+    if(chk_userlanguage() == 'zh'){
+        itemShowOrHide("li","enLabel","hide");
+        itemShowOrHide("li","zhLabel","show");
+    }else{
+        itemShowOrHide("li","enLabel","show");
+        itemShowOrHide("li","zhLabel","hide");
+    }
+
+    if(!$("#cmn-toggle-chineseOp").is(':checked') && $("#cmn-toggle-englishOp").is(':checked')){
+        msgDiv();
+    }else if($("#cmn-toggle-chineseOp").is(':checked') && !$("#cmn-toggle-englishOp").is(':checked')){
+        itemShowOrHide("p","chineseText","show");
+        itemShowOrHide("p","englishText","hide");
+    }
 };
 
 function msgDiv(){
-if(!$("#cmn-toggle-chineseOp").is(':checked')
-&& !$("#cmn-toggle-pinyinOp").is(':checked')
-&& !$("#cmn-toggle-redioOp").is(':checked')){
-$("div[class='box']").each( function() {$(this).hide();});
-}else{
-$("div[class='box']").each( function() {$(this).show();}); 
-}
+    if(!$("#cmn-toggle-chineseOp").is(':checked')
+        && !$("#cmn-toggle-pinyinOp").is(':checked')
+        && !$("#cmn-toggle-redioOp").is(':checked')){
+        $("div[class='box']").each( function() {$(this).hide();});
+    }else{
+        $("div[class='box']").each( function() {$(this).show();});
+    }
 };
 
 function showOrHide(obj,n,i){
     if(!$(obj).is(':checked')) {
-        itemShowOrHide(i,n,"hide"); 
-     } else {
+        itemShowOrHide(i,n,"hide");
+    } else {
         itemShowOrHide(i,n,"show");
-     }
-     msgDiv();
+    }
+    msgDiv();
 }
 
 function downVoice(obj){
 
-	if($(obj).is(':checked')) {
-		$("source[name='voiceSource']").each(function () {
-	        if ($(this).attr("src") != "") {
-	            return;
-	        } else {
-	            $(this).attr("src",$(this).attr("data-src"));
-	        }
-	        $(this).parents("audio").load();
-	    });
-	}
+    if($(obj).is(':checked')) {
+        $("source[name='voiceSource']").each(function () {
+            if ($(this).attr("src") != "") {
+                return;
+            } else {
+                $(this).attr("src",$(this).attr("data-src"));
+            }
+            $(this).parents("audio").load();
+        });
+    }
 }
+
+
 $("#cmn-toggle-chineseOp").click(function () {showOrHide(this,"chineseText","p");});
 $("#cmn-toggle-englishOp").click(function () {showOrHide(this,"englishText","p");});
 $("#cmn-toggle-pinyinOp").click(function () {showOrHide(this,"pinyinText","p");});
 $("#cmn-toggle-redioOp").click(function () {showOrHide(this,"textRedio","div");downVoice(this);});
 $(function(){
-  onInit();
+//	$("#replyModal").append(`<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="cancelRevert()">&times;</button><h4 class="modal-title" >Reply <span id="modal-toUser"></span></h4><input type="hidden" id="replyId" name="replyId"></div><div class="modal-body"><div class="contact-box text-center"><div class="form-group row"><div class="col-lg-6"><input type="text" class="form-control" id="modal-name" name="name" placeholder="Name*" required=""></div><div class="col-lg-6"><input type="email" class="form-control" id="modal-email" name="email" placeholder="Email" required=""></div></div><div class="form-group"><textarea class="form-control" id="modal-message" name="message" rows="10" style="float: left;"><font color="red"><span id="replyRlt"></span></font></label><button type="button" class="btn btn-default" data-dismiss="modal" onclick="cancelRevert()">cancel </button><button type="button" class="btn btn-primary" onclick="submitRevert()"> Submit  </button></div></div>`);
+    onInit();
 });
-// 
+
+
+//
 function chk_userlanguage () {
-    if (navigator.userLanguage) {  
-        baseLang = navigator.userLanguage.substring(0,2).toLowerCase();  
-    } else {  
-        baseLang = navigator.language.substring(0,2).toLowerCase();  
-    }  
+    /* get browser default lang */
+    if (navigator.userLanguage) {
+        baseLang = navigator.userLanguage.substring(0,2).toLowerCase();
+    } else {
+        baseLang = navigator.language.substring(0,2).toLowerCase();
+    }
     return baseLang;
 };
 function getLatestNews(message){
-	if(message != undefined && message.length > 0){
+    if(message != undefined && message.length > 0){
         for(var i = 0;i<message.length;i++){
-        	if(chk_userlanguage() == 'zh'){
-    			var divBlockZh = `<li name="zhLabel"><a href="${message[i]["uri"]}" target="_blank">${message[i]["title"]}</a></li>`;
-    			$("#latestNews").append(divBlockZh);
-    		}else{
-				var divBlockEn = `<li name="enLabel"><a href="${message[i]["uri"]}" target="_blank">${message[i]["enTitel"]}</a></li>`;
-        		$("#latestNews").append(divBlockEn);
-			}
+            if(chk_userlanguage() == 'zh'){
+                var divBlockZh = `<li name="zhLabel"><a href="${message[i]["uri"]}" target="_blank">${message[i]["title"]}</a></li>`;
+                $("#latestNews").append(divBlockZh);
+            }else{
+                var divBlockEn = `<li name="enLabel"><a href="${message[i]["uri"]}" target="_blank">${message[i]["enTitel"]}</a></li>`;
+                $("#latestNews").append(divBlockEn);
+            }
         }
     }
 }
 $(function(){
-	var date = getDate();
-    var data = "appId=abctest";
+    var date = getDate();
+    var data = "appId=" + appkey;
     jQuery.support.cors = true;
     $.ajax({
-            type: "post",
-            url: "http://localhost:8080/api/G/getNews",
-            contentType: "application/x-www-form-urlencoded;charset=utf-8",
-            dataType:"json",
-            crossDomain:true,
-           // jsonpCallback: 'successCallback',
-            success:function (message) {
-					getLatestNews(message);
-            },
-             error:function (message) {
-                
-            },
-            data:data
-    }); 
+        type: "post",
+        url: apiHost + "/api/G/getNews",
+        contentType: "application/x-www-form-urlencoded;charset=utf-8",
+        dataType:"json",
+        crossDomain:true,
+        // jsonpCallback: 'successCallback',
+        success:function (message) {
+            getLatestNews(message);
+        },
+        error:function (message) {
+
+        },
+        data:data
+    });
 });
 
 var loadCount = 1;
@@ -447,64 +456,67 @@ var pNum = 0;
 var tipNum = 0;
 var commentsTipNum = 0;
 var lessComments = 0;
+
+
+// show pageNumBar
 function setPageBar(beginNum,activeNum){
 
 
-	totalPageNum = Math.ceil(commentNum/5);
-	
-	for(var i = beginNum ; i <= totalPageNum && i < beginNum + 10;i++){
+    totalPageNum = Math.ceil(commentNum/5);
 
-		if( i == activeNum ){
-			$("#pageleft").after("<li class='active' id='pageBarLi"+i+"'><a name='pageBar'>"+i+"</a></li>");
-		}else{
-			$("#pageright").before("<li id='pageBarLi"+i+"'><a name='pageBar' onclick='showPage("+ i +")'>"+i+"</a></li>");
-		}
-	}
+    for(var i = beginNum ; i <= totalPageNum && i < beginNum + 10;i++){
+
+        if( i == activeNum ){
+            $("#pageleft").after("<li class='active' id='pageBarLi"+i+"'><a name='pageBar'>"+i+"</a></li>");
+        }else{
+            $("#pageright").before("<li id='pageBarLi"+i+"'><a name='pageBar' onclick='showPage("+ i +")'>"+i+"</a></li>");
+        }
+    }
 }
 
 function tipPageBar(direction){
 
-	var list = $("#pageBarUl").find("li");
-	var leftNum = list.eq(1).children("a:eq(0)").html();
-	var rigthNum = list.eq(list.length - 2).children("a:eq(0)").html();
-	for(var i = 1; i < list.length - 1; i++ ){
-		list.eq(i).remove();
-	}
-	if(direction == "right" && rigthNum < totalPageNum){
-		setPageBar(parseInt(rigthNum,10) + 1,parseInt(rigthNum,10) + 1);
-		showPage(parseInt(rigthNum,10) + 1);
-	}
-	if(direction == "left" && leftNum > 1){
-		if(parseInt(leftNum) - 10 > 1){
-			setPageBar(parseInt(leftNum) - 10,parseInt(leftNum)  - 10);
-			showPage(parseInt(leftNum,10) + 1);
-		}else{
-			setPageBar(1,1);
-			showPage(1);
-		}
-	}
+    var list = $("#pageBarUl").find("li");
+    var leftNum = list.eq(1).children("a:eq(0)").html();
+    var rigthNum = list.eq(list.length - 2).children("a:eq(0)").html();
+    for(var i = 1; i < list.length - 1; i++ ){
+        list.eq(i).remove();
+    }
+    if(direction == "right" && rigthNum < totalPageNum){
+        setPageBar(parseInt(rigthNum,10) + 1,parseInt(rigthNum,10) + 1);
+        showPage(parseInt(rigthNum,10) + 1);
+    }
+    if(direction == "left" && leftNum > 1){
+        if(parseInt(leftNum) - 10 > 1){
+            setPageBar(parseInt(leftNum) - 10,parseInt(leftNum)  - 10);
+            showPage(parseInt(leftNum,10) + 1);
+        }else{
+            setPageBar(1,1);
+            showPage(1);
+        }
+    }
 }
 
 
 function showPage(){
-	loadCount++;
-	// set class
+    loadCount++;
+    // set class
 //	 $("#pageBarUl").children(".active").removeClass();
 //	 $("#pageBarLi"+num).addClass("active");
 
-	// 
+    //
 //	$("#comments-list").children("div").each(function(){
 //		$(this).remove();
 //	})
 
-	var data = "appId=abctest&num=" +pageNum + "&type=1&pageNum="+loadCount+"&pageSize=5&tipNum=" +commentsTipNum;
-     $.ajax({
+    var data = "appId=" +appkey+ "&num=" +pageNum + "&type=1&pageNum="+loadCount+"&pageSize=5&tipNum=" +commentsTipNum;
+    $.ajax({
         type: "post",
-        url: "http://localhost:8080/api/A/getComment",
+        url: apiHost + "/api/A/getComment",
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         dataType:"json",
         crossDomain:true,
-       // jsonpCallback: 'successCallback',
+        // jsonpCallback: 'successCallback',
         success:function (message) {
             showCommentBlock(message);
         },
@@ -522,14 +534,14 @@ function showRevert(ownerNum,pn,pSize,tNum){
     revertNum = ownerNum;
     pNum = 1 + pn;
     tipNum = tNum;
-    var data = "appId=abctest&num=" +ownerNum + "&type=2&pageNum="+pNum+"&pageSize="+pSize + "&tipNum="+tipNum;
-     $.ajax({
+    var data = "appId=" +appkey+ "&num=" +ownerNum + "&type=2&pageNum="+pNum+"&pageSize="+pSize + "&tipNum="+tipNum;
+    $.ajax({
         type: "post",
-        url: "http://localhost:8080/api/A/getComment",
+        url: apiHost + "/api/A/getComment",
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         dataType:"json",
         crossDomain:true,
-       // jsonpCallback: 'successCallback',
+        // jsonpCallback: 'successCallback',
         success:function (message) {
             debugger;
             if(message != null && message.length > 0 && message[0] != null ){
@@ -544,10 +556,10 @@ function showRevert(ownerNum,pn,pSize,tNum){
                     var reDivBlock = `<div class='media' style='margin-top: 0px;' id=${reNum}><div class='pull-left'></div><div class='media-body'><div class='well'><div class='media-heading'><strong>${reUname}</strong><span>&nbsp;to&nbsp;</span><strong>${reToName}</strong>&nbsp; <small>${redate}</small></div><p>${reComments}</p><a name="Reply" class="pull-right btn btn-primary btn-outlined" style="padding: 1px 16px;" data-toggle="modal" data-target="#replyModal" onclick="revert(${ownerNum},'${reUname}')">Reply</a></div></div></div>`;
                     $("#lodeMore"+ownerNum).before(reDivBlock);
                 }
-               $("#lodeMore"+revertNum).remove();
+                $("#lodeMore"+revertNum).remove();
                 $("#"+message[message.length - 1]["num"]).after(`<span id='lodeMore${revertNum}' class='label label-warning pull-right'><a onclick="showRevert(${revertNum},${pNum},3,${tipNum})">lode more</a></span>`);
             }else{
-               $("#lodeMore"+revertNum).remove();
+                $("#lodeMore"+revertNum).remove();
             }
         },
         error:function (message) {
@@ -561,24 +573,24 @@ function showRevert(ownerNum,pn,pSize,tNum){
 
 // add comment
 function showCommentBlock(message){
-    
+
 
     if(message != undefined && message.length > 0){
-    	commentsTipNum = message[0]["num"];
-    	commentNum = message[0]["counts"]; 
-    	lessComments = commentNum - (loadCount-1) * 5;
+        commentsTipNum = message[0]["num"];
+        commentNum = message[0]["counts"];
+        lessComments = commentNum - (loadCount-1) * 5;
         for(var i = 0;i<message.length;i++){
             var tmp = message[i];
             var num = tmp["num"];
             var uname = tmp["uname"];
             var date = tmp["date"];
             var comments = tmp["comments"];
-            
-             var divBlock =`<div class="media" style="border:1px solid #8F8F8F;" ><div class='pull-left'><div style='text-align: center;'><font color="#1BB29E"><h3>${lessComments}</h3></font></div></div><div class='media-body'><div class='well' id=${num}><div class='media-heading'><strong>${uname}</strong>&nbsp; <small>${date}</small></div><p>${comments}</p><a name='Reply' class='pull-right btn btn-primary btn-outlined' style="padding: 1px 16px;" data-toggle='modal' data-target='#replyModal' onclick='revert(${num},"${uname}")'>Reply</a></div></div></div>`;
-                $("#loadMoreComments").before(divBlock);
-			lessComments--;
-           
-            
+
+            var divBlock =`<div class="media" style="border:1px solid #8F8F8F;" ><div class='pull-left'><div style='text-align: center;'><font color="#1BB29E"><h3>${lessComments}</h3></font></div></div><div class='media-body'><div class='well' id=${num}><div class='media-heading'><strong>${uname}</strong>&nbsp; <small>${date}</small></div><p>${comments}</p><a name='Reply' class='pull-right btn btn-primary btn-outlined' style="padding: 1px 16px;" data-toggle='modal' data-target='#replyModal' onclick='revert(${num},"${uname}")'>Reply</a></div></div></div>`;
+            $("#loadMoreComments").before(divBlock);
+            lessComments--;
+
+
             var reCounts = tmp["reCounts"];
             var details = tmp["details"];
             if(details != null && details.length > 0 && details[0] != null){
@@ -590,51 +602,51 @@ function showCommentBlock(message){
                     var redate = reTmp["date"];
                     var reComments = reTmp["comments"];
                     var reDivBlock = `<div class='media' style='margin-top: 0px;' id=${reNum}><div class='pull-left'></div><div class='media-body'><div class='well' ><div class='media-heading'><strong>${reUname}</strong><span>&nbsp;to&nbsp;</span><strong>${reToName}</strong>&nbsp; <small>${redate}</small></div><p>${reComments}</p><a name="Reply" class="pull-right btn btn-primary btn-outlined" style="padding: 1px 16px;" data-toggle="modal" data-target="#replyModal" onclick="revert(${num},'${reUname}')">Reply</a></div></div></div>`;
-                     $("#"+num).after(reDivBlock);
+                    $("#"+num).after(reDivBlock);
                 }
                 if(reCounts > details.length){
                     $("#"+details[details.length - 1]["num"]).after(`<span id='lodeMore${num}' class='label label-warning pull-right'><a onclick="showRevert(${num},1,${details.length},${details[0]["num"]})">lode more</a></span>`);
                 }
             }
         }
-         $("#commentsH3").text(commentNum+" Comments");
-         
+        $("#commentsH3").text(commentNum+" Comments");
+
     }else{
-    	if(commentNum == 0){
-			$("#commentsH3").text("No comment");
-    	}
-    	$("#loadMoreComments").remove();
+        if(commentNum == 0){
+            $("#commentsH3").text("No comment");
+        }
+        $("#loadMoreComments").remove();
     }
-   
+
 
 }
 
 
 // 加载评论
 $(function(){
-	 
+
     $("#submitCommentTip").hide();
 
-    var data = "appId=abctest&num=" +pageNum + "&type=1&pageNum=1&pageSize=5";
+    var data = "appId="+appkey+"&num=" +pageNum + "&type=1&pageNum=1&pageSize=5";
 
-     $.ajax({
+    $.ajax({
         type: "post",
-        url: "http://localhost:8080/api/A/getComment",
+        url:  apiHost + "/api/A/getComment",
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         dataType:"json",
         crossDomain:true,
-       // jsonpCallback: 'successCallback',
+        // jsonpCallback: 'successCallback',
         success:function (message) {
             showCommentBlock(message);
             setPageBar(1,1);
         },
-         error:function (message) {
+        error:function (message) {
             $("#commentsH3").val("No comment");
         },
         data:data
     });
-   
- });
+
+});
 // 提交评论 "http://localhost:8080/api/A/submitComment"
 function submit(url,data) {
     $.ajax({
@@ -650,157 +662,157 @@ function submit(url,data) {
             return message;
         }
     });
- } ;
+} ;
 
 /**
-* get date
-*/
+ * get date
+ */
 function getDate(){
-var curTime=new Date()
+    var curTime=new Date()
 //枚举月份
-var month=new Array(12);
-month[0]="January";
-month[1]="February";
-month[2]="March";
-month[3]="April";
-month[4]="May";
-month[5]="June";
-month[6]="July";
-month[7]="August";
-month[8]="September";
-month[9]="October";
-month[10]="November";
-month[11]="December";
-var minutes = curTime.getMinutes();
-var secends = curTime.getSeconds();
-if(parseInt(minutes,10) < 10){
-    minutes = "0" + minutes;
-}
-if(parseInt(secends,10) < 10){
-    secends = "0" + secends;
-}
-var strCurTime = month[curTime.getMonth()] + " " + curTime.getDate() + ", " + curTime.getFullYear() + " " + curTime.getHours() + ":" + minutes + ":" + secends;
-return strCurTime;
+    var month=new Array(12);
+    month[0]="January";
+    month[1]="February";
+    month[2]="March";
+    month[3]="April";
+    month[4]="May";
+    month[5]="June";
+    month[6]="July";
+    month[7]="August";
+    month[8]="September";
+    month[9]="October";
+    month[10]="November";
+    month[11]="December";
+    var minutes = curTime.getMinutes();
+    var secends = curTime.getSeconds();
+    if(parseInt(minutes,10) < 10){
+        minutes = "0" + minutes;
+    }
+    if(parseInt(secends,10) < 10){
+        secends = "0" + secends;
+    }
+    var strCurTime = month[curTime.getMonth()] + " " + curTime.getDate() + ", " + curTime.getFullYear() + " " + curTime.getHours() + ":" + minutes + ":" + secends;
+    return strCurTime;
 }
 
 function revert(id,userName){
-$("#replyId").val(id);
-$("#modal-toUser").text(userName);
-var name = $("#comment-Name").val();
-if(name != undefined && name != ""){
-    $("#modal-name").val(name);
-}
-var email = $("#comment-Email").val();
-if(email != undefined && email != ""){
-    $("#modal-email").val(email);
-}
+    $("#replyId").val(id);
+    $("#modal-toUser").text(userName);
+    var name = $("#comment-Name").val();
+    if(name != undefined && name != ""){
+        $("#modal-name").val(name);
+    }
+    var email = $("#comment-Email").val();
+    if(email != undefined && email != ""){
+        $("#modal-email").val(email);
+    }
 }
 
 function submitRevert(){
 
-var replyId = $("#replyId").val();
+    var replyId = $("#replyId").val();
 
-var toName = $("#modal-toUser").html();
+    var toName = $("#modal-toUser").html();
 // get name
-var name = $("#modal-name").val();
+    var name = $("#modal-name").val();
 // get email
-var email = $("#modal-email").val();
+    var email = $("#modal-email").val();
 // get message
-var comments = $("#modal-message").val();
+    var comments = $("#modal-message").val();
 
-if(name == undefined || name == ""){
-    alert("Please enter your name");
-    return;
-}
-if(comments == undefined || comments == ""){
-    alert("Please enter a comment");
-    return;
-}else if(comments.length < 2){
-    alert("Comment length must be greater than 2 characters");
-    return;
-}
-var reg1 = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)/;
-if(reg1.test(email) == false){
-    alert("Email is malformed");
-    return;
-}
-$("#comment-Name").val(name);
-$("#comment-Email").val(email);
-var date = getDate();
-var data = "appId=abctest&name=" +name + "&type=2&num=" +replyId + "&email=" + email +"&date=" + date +"&comments=" + comments  +"&toName="+toName;
-jQuery.support.cors = true;
-$.ajax({
+    if(name == undefined || name == ""){
+        alert("Please enter your name");
+        return;
+    }
+    if(comments == undefined || comments == ""){
+        alert("Please enter a comment");
+        return;
+    }else if(comments.length < 2){
+        alert("Comment length must be greater than 2 characters");
+        return;
+    }
+    var reg1 = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)/;
+    if(reg1.test(email) == false){
+        alert("Email is malformed");
+        return;
+    }
+    $("#comment-Name").val(name);
+    $("#comment-Email").val(email);
+    var date = getDate();
+    var data = "appId=" +appkey+ "&name=" +name + "&type=2&num=" +replyId + "&email=" + email +"&date=" + date +"&comments=" + comments  +"&toName="+toName;
+    jQuery.support.cors = true;
+    $.ajax({
         type: "post",
-        url: "http://localhost:8080/api/A/submitComment",
+        url: apiHost + "/api/A/submitComment",
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         dataType:"json",
         crossDomain:true,
-       // jsonpCallback: 'successCallback',
+        // jsonpCallback: 'successCallback',
         success:function (message) {
 
             var divBlock = `<div class='media' style='margin-top: 0px;' ><div class='pull-left'></div><div class='media-body'><div class='well'><div class='media-heading'><strong>${name}</strong><span>&nbsp;to&nbsp;</span><strong>${toName}</strong>&nbsp; <small>${date}</small></div><p>${comments}</p><a name="Reply" class="pull-right btn btn-primary btn-outlined" style="padding: 1px 16px;" data-toggle="modal" data-target="#replyModal" onclick="revert(${replyId},'${name}')">Reply</a></div></div></div>`;
-             $("#"+replyId).after(divBlock);
-              $('#replyModal').modal('hide');
+            $("#"+replyId).after(divBlock);
+            $('#replyModal').modal('hide');
             $("#modal-message").val("");
             $("#replyRlt").text("");
         },
-         error:function (message) {
+        error:function (message) {
             $("#submitCommentTip").show();
-             $("#replyRlt").text("Failed, please try again later");
+            $("#replyRlt").text("Failed, please try again later");
         },
         data:data
 
-});
+    });
 
 
 }
 
 function cancelRevert(){
-$("#replyRlt").text("");
+    $("#replyRlt").text("");
 }
 
 function submitComment(){
 
-var name = $("#comment-Name").val();
-var email = $("#comment-Email").val();
-var comments = $("#comment-Comment").val();
+    var name = $("#comment-Name").val();
+    var email = $("#comment-Email").val();
+    var comments = $("#comment-Comment").val();
 
-if(name == undefined || name == ""){
-    alert("Please enter your name");
-    return;
-}
-if(comments == undefined || comments == ""){
-    alert("Please enter a comment");
-    return;
-}else if(comments.length < 2){
-    alert("Comment length must be greater than 2 characters");
-    return;
-}
+    if(name == undefined || name == ""){
+        alert("Please enter your name");
+        return;
+    }
+    if(comments == undefined || comments == ""){
+        alert("Please enter a comment");
+        return;
+    }else if(comments.length < 2){
+        alert("Comment length must be greater than 2 characters");
+        return;
+    }
 
-var reg1 = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)/;
-if(reg1.test(email) == false){
-    alert("Email is malformed");
-    return;
-}
+    var reg1 = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)/;
+    if(reg1.test(email) == false){
+        alert("Email is malformed");
+        return;
+    }
 
-var date = getDate();
+    var date = getDate();
 // var data = {"name":name,"type":1,"num":1,"email":email,"date":date,"comments":comments,"appId":"abctest"};
-var data = "appId=abctest&name=" +name + "&type=1&num=" + pageNum+ "&email=" + email +"&date=" + date +"&comments=" + comments  ;
+    var data = "appId="+appkey+"&name=" +name + "&type=1&num=" + pageNum+ "&email=" + email +"&date=" + date +"&comments=" + comments  ;
     jQuery.support.cors = true;
     // submit
     $.ajax({
         type: "post",
-        url: "http://localhost:8080/api/A/submitComment",
+        url: apiHost + "/api/A/submitComment",
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         dataType:"json",
         crossDomain:true,
-       // jsonpCallback: 'successCallback',
+        // jsonpCallback: 'successCallback',
         success:function (message) {
             var num = message["num"];
-               var divBlock =`<div class="media" style="border:1px solid #8F8F8F;"><div class='pull-left'></div><div class='media-body'><div class='well' id=${num}><div class='media-heading'><strong>${name}</strong>&nbsp; <small>${getDate()}</small></div><p>${comments}</p><a name='Reply' class='pull-right btn btn-primary btn-outlined' style="padding: 1px 16px;" data-toggle='modal' data-target='#replyModal' onclick='revert(${num},"${name}")'>Reply</a></div></div></div>`;
-                $("#commentsH3").after(divBlock);
-                $("#comment-Comment").val("");
-                $("#submitCommentTip").hide();
+            var divBlock =`<div class="media" style="border:1px solid #8F8F8F;"><div class='pull-left'></div><div class='media-body'><div class='well' id=${num}><div class='media-heading'><strong>${name}</strong>&nbsp; <small>${getDate()}</small></div><p>${comments}</p><a name='Reply' class='pull-right btn btn-primary btn-outlined' style="padding: 1px 16px;" data-toggle='modal' data-target='#replyModal' onclick='revert(${num},"${name}")'>Reply</a></div></div></div>`;
+            $("#commentsH3").after(divBlock);
+            $("#comment-Comment").val("");
+            $("#submitCommentTip").hide();
         },
         error:function (message) {
             $("#submitCommentTip").show();
@@ -821,7 +833,7 @@ function isVisible($node) {
         return false;
     }
 }
-function loadPartImg() { 
+function loadPartImg() {
     $("img[name='pic']").each(function () {
         if ($(this).attr("src") != "") {
             return;
