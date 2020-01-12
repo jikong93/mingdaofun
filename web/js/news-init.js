@@ -350,7 +350,10 @@ function onInit(){
     }else{
         itemShowOrHide("li","enLabel","show");
         itemShowOrHide("li","zhLabel","hide");
+        $("#cmn-toggle-chineseOp").attr("checked",false);
+        $("#cmn-toggle-englishOp").attr("checked",true);
     }
+
 
     if(!$("#cmn-toggle-chineseOp").is(':checked') && $("#cmn-toggle-englishOp").is(':checked')){
         msgDiv();
